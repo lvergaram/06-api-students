@@ -1,25 +1,40 @@
 import { Student } from "../models/student.model.js"
 
 export const getAllController = async(req,res)=> {
-    const students = await Student.findAll()
-    console.log(students)
-    res.send(JSON.stringify(students))
-
+    try {
+        const students = await Student.findAll()
+        console.log(students)
+        res.send(JSON.stringify(students))    
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("no se pudo obtener ususarios")
+    }
 }
 
 export const getOneController =  async(req,res)=> {
-    const {id} = req.params
-    const student = await Student.findById(id)
-    console.log(student)
-    res.json(student)
+    try {
+        const {id} = req.params
+        const student = await Student.findById(id)
+        console.log(student)
+        res.json(student)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("no se pudo obtener ususario")
+    }
 
 }
 
 export const getOneByRutController =  async(req,res)=> {
-    const {rut} = req.params
-    const student = await Student.findByRut(rut)
-    console.log(student)
-    res.json(student)
+    try {
+        const {rut} = req.params
+        const student = await Student.findByRut(rut)
+        console.log(student)
+        res.json(student)  
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("no se pudo obtener ususario")
+    }
+    
 }
 
 
